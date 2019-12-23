@@ -1,0 +1,21 @@
+package edu.njucm._509.controller;
+
+import edu.njucm._509.pojo.User;
+import edu.njucm._509.service.TestService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+
+@RestController
+public class DemoController {
+
+    @Autowired
+    private TestService testService;
+
+    @RequestMapping("test")
+    public List<User> Test() {
+        return testService.test();
+    }
+}

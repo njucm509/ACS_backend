@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8888
 spring:
   application:
     name: acs_backend
@@ -7,7 +7,7 @@ spring:
     druid:
       url: jdbc:mysql://localhost:3306/dc?useSSL=FALSE&serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8
       username: root
-      password: 88888888
+      password: root1234
 mybatis:
   type-aliases-package: edu.njucm._509
   mapper-locations: classpath:/impl/**/*.xml

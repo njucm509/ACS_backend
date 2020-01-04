@@ -7,10 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-/**
- * @author : timo
- * @date :  2020/1/4 14:56
- */
+
 @Data
 @Table(name = "role")
 public class Role {

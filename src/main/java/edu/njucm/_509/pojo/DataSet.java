@@ -8,10 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Date;
 
-/**
- * @author : timo
- * @date :  2020/1/4 14:55
- */
 @Data
 @Table(name = "dataset")
 public class DataSet {

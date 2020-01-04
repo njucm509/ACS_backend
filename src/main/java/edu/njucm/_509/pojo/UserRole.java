@@ -7,6 +7,6 @@ import javax.persistence.Table;
 @Data
 @Table(name = "user_name")
 public class UserRole {
-    private String userId;
-    private String roleId;
+    private String user_id;
+    private String role_id;
 }

@@ -1,6 +1,6 @@
 package edu.njucm._509.service;
 
-import edu.njucm._509.mapper.TestMapper;
+import edu.njucm._509.mapper.UserMapper;
 import edu.njucm._509.pojo.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,13 +10,13 @@ import java.util.List;
 
 @Slf4j
 @Service
-public class TestService {
+public class UserService {
 
     @Autowired
-    private TestMapper testMapper;
+    private UserMapper userMapper;
 
-    public List<User> test() {
-        List<User> list = testMapper.selectAll();
+    public List<User> selectUserAll() {
+        List<User> list = userMapper.selectAll();
         log.info("user list: {}", list);
         return list;
     }

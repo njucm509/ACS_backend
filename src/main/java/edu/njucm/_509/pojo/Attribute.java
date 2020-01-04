@@ -7,6 +7,6 @@ import javax.persistence.Table;
 @Data
 @Table(name = "attribute")
 public class Attribute {
-    private String attributeId;
-    private String attrbuteName;
+    private String attribute_id;
+    private String attribute_name;
 }

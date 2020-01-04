@@ -13,20 +13,20 @@ import javax.persistence.Table;
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String roleId;
-    private String roleName;
-    private String authUpload;
-    private String authDownload;
-    private String authAdd;
-    private String authDelete;
-    private String authUpdate;
-    private String authSelectSelf;
-    private String authSelectDepartment;
-    private String authSelectCompany;
-    private String authSelectDistrict;
-    private String authSelectCity;
-    private String authSelectProvince;
-    private String authSelectCountry;
-    private String auditAuthority;
-    private String attributePermission;
+    private String role_id;
+    private String role_name;
+    private String auth_upload;
+    private String auth_download;
+    private String auth_add;
+    private String auth_delete;
+    private String auth_update;
+    private String auth_select_self;
+    private String auth_select_department;
+    private String auth_select_company;
+    private String auth_select_district;
+    private String auth_select_city;
+    private String auth_select_province;
+    private String auth_select_country;
+    private String audit_authority;
+    private String attribute_permission;
 }

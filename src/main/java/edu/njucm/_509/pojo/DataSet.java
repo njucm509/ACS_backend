@@ -19,16 +19,16 @@ public class DataSet {
     private Date birthday;
     private String hospital;
     private String department;
-    private String attendingDoctor;
-    private String medicalInsurance;
-    private Date dataOfConsultation;
-    private String visitingStatus;
+    private String attending_doctor;
+    private String medical_insurance;
+    private Date data_of_consultation;
+    private String visiting_status;
     private String complaints;
     private String seriousness;
-    private String medicalHistory;
-    private String treatmentEffect;
-    private String specialityCheckUp;
-    private String drugUse;
-    private Date releaseTime;
+    private String medical_history;
+    private String treatment_effect;
+    private String speciality_check_up;
+    private String drug_use;
+    private Date release_time;
 
 }

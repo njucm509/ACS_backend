@@ -13,11 +13,11 @@ import javax.persistence.Table;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
-    private String userName;
-    private String userPassword;
-    private String userIP;
-    private String userDepartment;
-    private String userCompany;
-    private String userStatus;
+    private String user_id;
+    private String user_name;
+    private String user_password;
+    private String user_ip;
+    private String user_department;
+    private String user_company;
+    private String user_status;
 }

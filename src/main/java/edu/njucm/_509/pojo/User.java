@@ -1,11 +1,13 @@
 package edu.njucm._509.pojo;
 
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
 import javax.persistence.*;
 
 
 @Data
+@ApiModel
 @Table(name = "user")
 public class User {
     @Id

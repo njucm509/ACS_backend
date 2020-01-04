@@ -5,6 +5,7 @@ import edu.njucm._509.pojo.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 
@@ -18,6 +19,10 @@ public class UserService {
     public List<User> selectUserAll() {
         List<User> list = userMapper.selectAll();
         log.info("user list: {}", list);
+//        if (CollectionUtils.isEmpty(list)) {
+            // 可以尝试自定义异常
+//            throw new Exception("user list not found");
+//        }
         return list;
     }
 }

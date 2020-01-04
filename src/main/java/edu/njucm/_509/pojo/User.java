@@ -7,12 +7,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * @author timo
+ */
 @Data
-@Table(name = "test_user")
+@Table(name = "user")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    private String name;
-    private Integer age;
+    private String id;
+    private String userName;
+    private String userPassword;
+    private String userIP;
+    private String userDepartment;
+    private String userCompany;
+    private String userStatus;
 }

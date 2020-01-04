@@ -4,13 +4,13 @@ Navicat MySQL Data Transfer
 Source Server         : localhost
 Source Server Version : 80016
 Source Host           : localhost:3306
-Source Database       : acs
+Source Database       : dc
 
 Target Server Type    : MYSQL
 Target Server Version : 80016
 File Encoding         : 65001
 
-Date: 2020-01-03 14:38:12
+Date: 2020-01-04 14:53:45
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -20,8 +20,8 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `attribute`;
 CREATE TABLE `attribute` (
-  `attribute_id` varchar(255) COLLATE utf8_bin NOT NULL,
-  `attribute_name` varchar(255) COLLATE utf8_bin NOT NULL
+  `attribute_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `attribute_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
@@ -37,24 +37,25 @@ INSERT INTO `attribute` VALUES ('4', 'NULL');
 -- ----------------------------
 DROP TABLE IF EXISTS `dataset`;
 CREATE TABLE `dataset` (
-  `id` varchar(255) COLLATE utf8_bin NOT NULL,
-  `name` varchar(255) COLLATE utf8_bin NOT NULL,
-  `sex` char(1) COLLATE utf8_bin NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `sex` char(1) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `birthday` date NOT NULL,
-  `hospital` varchar(255) COLLATE utf8_bin NOT NULL,
-  `department` varchar(255) COLLATE utf8_bin NOT NULL,
-  `attending_doctor` varchar(255) COLLATE utf8_bin NOT NULL,
-  `medical_insurance` varchar(255) COLLATE utf8_bin NOT NULL,
+  `hospital` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `department` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `attending_doctor` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `medical_insurance` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `date_of_consultation` date NOT NULL,
-  `visiting_status` varchar(255) COLLATE utf8_bin NOT NULL,
-  `complaints` varchar(255) COLLATE utf8_bin NOT NULL,
-  `seriousness` varchar(255) COLLATE utf8_bin NOT NULL,
-  `medical_history` varchar(255) COLLATE utf8_bin NOT NULL,
-  `treatment_effect` varchar(255) COLLATE utf8_bin NOT NULL,
-  `speciality_check_up` varchar(255) COLLATE utf8_bin NOT NULL,
-  `drug_use` varchar(255) COLLATE utf8_bin NOT NULL,
-  `release_time` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  `visiting_status` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `complaints` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `seriousness` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `medical_history` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `treatment_effect` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `speciality_check_up` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `drug_use` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `release_time` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=155 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
 -- Records of dataset
@@ -70,8 +71,8 @@ INSERT INTO `dataset` VALUES ('153', '佚名', '男', '2003-09-01', '安徽省�
 -- ----------------------------
 DROP TABLE IF EXISTS `role`;
 CREATE TABLE `role` (
-  `role_id` varchar(255) COLLATE utf8_bin NOT NULL,
-  `role_name` varchar(255) COLLATE utf8_bin NOT NULL,
+  `role_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `role_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `auth_upload` char(1) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
   `auth_download` char(1) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
   `auth_add` char(1) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
@@ -109,10 +110,10 @@ INSERT INTO `role` VALUES ('9', '国家监管者', '', '1', '', '1', '', '', '',
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `user_id` varchar(255) COLLATE utf8_bin NOT NULL,
-  `user_name` varchar(255) COLLATE utf8_bin NOT NULL,
-  `user_password` varchar(255) COLLATE utf8_bin NOT NULL,
-  `user_ip` varchar(255) COLLATE utf8_bin NOT NULL,
-  `user_department` varchar(255) COLLATE utf8_bin NOT NULL,
+  `user_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `user_password` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `user_ip` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `user_department` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `user_company` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `user_status` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`user_id`)
@@ -129,8 +130,8 @@ INSERT INTO `user` VALUES ('2', '张二', 'admin', '10.10.100.12', '部门2', '�
 -- ----------------------------
 DROP TABLE IF EXISTS `user_role`;
 CREATE TABLE `user_role` (
-  `user_id` varchar(1) COLLATE utf8_bin NOT NULL,
-  `role_id` varchar(255) COLLATE utf8_bin NOT NULL
+  `user_id` varchar(1) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `role_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------

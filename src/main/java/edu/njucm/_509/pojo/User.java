@@ -2,10 +2,7 @@ package edu.njucm._509.pojo;
 
 import lombok.Data;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 
 @Data
@@ -13,11 +10,18 @@ import javax.persistence.Table;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String user_id;
-    private String user_name;
-    private String user_password;
-    private String user_ip;
-    private String user_department;
-    private String user_company;
-    private String user_status;
+    @Column(name = "user_id")
+    private String userId;
+    @Column(name = "user_name")
+    private String userName;
+    @Column(name = "user_password")
+    private String userPassword;
+    @Column(name = "user_ip")
+    private String userIP;
+    @Column(name = "user_department")
+    private String userDepartment;
+    @Column(name = "user_company")
+    private String userCompany;
+    @Column(name = "user_status")
+    private String userStatus;
 }

@@ -16,7 +16,7 @@ class ApplicationTests {
     void test(){
         List<User> users = userService.selectUserAll();
         for (User user:users){
-            System.out.println(user.getUser_name());
+            System.out.println(user.getUserId()+user.getUserName());
         }
     }
 

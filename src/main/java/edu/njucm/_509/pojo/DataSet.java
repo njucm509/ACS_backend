@@ -2,10 +2,7 @@ package edu.njucm._509.pojo;
 
 import lombok.Data;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 @Data
@@ -13,22 +10,39 @@ import java.util.Date;
 public class DataSet {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private int id;
+    @Column(name = "name")
     private String name;
+    @Column(name = "sex")
     private String sex;
+    @Column(name = "birthday")
     private Date birthday;
+    @Column(name = "hospital")
     private String hospital;
+    @Column(name = "department")
     private String department;
-    private String attending_doctor;
-    private String medical_insurance;
-    private Date data_of_consultation;
-    private String visiting_status;
+    @Column(name = "attending_doctor")
+    private String attendingDoctor;
+    @Column(name = "medical_insurance")
+    private String medicalInsurance;
+    @Column(name = "data_of_consultation")
+    private Date dataOfConsultation;
+    @Column(name = "visiting_status")
+    private String visitingStatus;
+    @Column(name = "complaints")
     private String complaints;
+    @Column(name = "seriousness")
     private String seriousness;
-    private String medical_history;
-    private String treatment_effect;
-    private String speciality_check_up;
-    private String drug_use;
-    private Date release_time;
+    @Column(name = "medical_history")
+    private String medicalHistory;
+    @Column(name = "treatment_effect")
+    private String treatmentEffect;
+    @Column(name = "special_check_up")
+    private String specialityCheckUp;
+    @Column(name = "drug_user")
+    private String drugUse;
+    @Column(name = "release_time")
+    private Date releaseTime;
 
 }

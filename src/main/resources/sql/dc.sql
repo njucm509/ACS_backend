@@ -13,6 +13,7 @@ File Encoding         : 65001
 Date: 2020-01-04 14:53:45
 */
 
+
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------

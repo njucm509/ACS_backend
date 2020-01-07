@@ -1,10 +1,12 @@
 package edu.njucm._509.pojo;
 
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Date;
 
+@ApiModel
 @Data
 @Table(name = "dataset")
 public class DataSet {

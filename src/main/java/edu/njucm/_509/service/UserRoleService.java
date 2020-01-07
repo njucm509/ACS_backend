@@ -1,9 +1,15 @@
 package edu.njucm._509.service;
 
 import edu.njucm._509.mapper.UserMapper;
+import edu.njucm._509.mapper.UserRoleMapper;
+import edu.njucm._509.pojo.User;
+import edu.njucm._509.pojo.UserRole;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tk.mybatis.mapper.entity.Example;
+
+import java.util.List;
 
 /**
  * @author : timo
@@ -13,5 +19,20 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserRoleService {
     @Autowired
-    private UserMapper userMapper;
+    private UserRoleMapper userRoleMapper;
+
+    public List<UserRole> selectUserRoleAll(){
+        List<UserRole> userRoles = userRoleMapper.selectAll();
+        log.info("userRoles list:{}",userRoles);
+        return userRoles;
+    }
+    public int addUserRole(UserRole userRole){
+        return userRoleMapper.insert(userRole);
+    }
+    public int deleteUserRole(UserRole userRole){
+        return userRoleMapper.delete(userRole);
+    }
+    public int updateUserRole(UserRole userRole){
+        return userRoleMapper.updateByExample(userRole,new Example(userRole.getClass()));
+    }
 }

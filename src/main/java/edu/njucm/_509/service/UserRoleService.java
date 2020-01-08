@@ -33,6 +33,6 @@ public class UserRoleService {
         return userRoleMapper.delete(userRole);
     }
     public int updateUserRole(UserRole userRole){
-        return userRoleMapper.updateByExample(userRole,new Example(userRole.getClass()));
+        return userRoleMapper.updateByPrimaryKey(userRole);
     }
 }

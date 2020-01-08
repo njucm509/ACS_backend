@@ -31,6 +31,6 @@ public class AttributeService {
         return attributeMapper.delete(attribute);
     }
     public int updateAttribute(Attribute attribute){
-        return attributeMapper.updateByExample(attribute,new Example(attribute.getClass()));
+        return attributeMapper.updateByPrimaryKey(attribute);
     }
 }

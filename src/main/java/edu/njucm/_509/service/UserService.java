@@ -33,7 +33,6 @@ public class UserService {
     public int deleteUser(User user){
         return userMapper.delete(user);
     }
-    public int updateUser(User user){
-        return userMapper.updateByExample(user,new Example(user.getClass()));
-    }
+    public int updateUser(User user) { return userMapper.updateByPrimaryKey(user);}
+
 }

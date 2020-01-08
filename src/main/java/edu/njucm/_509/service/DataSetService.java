@@ -32,6 +32,6 @@ public class DataSetService {
         return dataSetMapper.delete(dataSet);
     }
     public int updateDataSet(DataSet dataSet){
-        return dataSetMapper.updateByExample(dataSet,new Example(dataSet.getClass()));
+        return dataSetMapper.updateByPrimaryKey(dataSet);
     }
 }

@@ -31,6 +31,6 @@ public class RoleService {
         return roleMapper.delete(role);
     }
     public int updateRole(Role role){
-        return roleMapper.updateByExample(role,new Example(role.getClass()));
+        return roleMapper.updateByPrimaryKey(role);
     }
 }

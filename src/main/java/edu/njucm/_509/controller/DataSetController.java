@@ -1,7 +1,7 @@
 package edu.njucm._509.controller;
 
-import edu.njucm._509.pojo.User;
-import edu.njucm._509.service.UserService;
+import edu.njucm._509.pojo.DataSet;
+import edu.njucm._509.service.DataSetService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -17,56 +17,56 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@Api("用户信息管理相关Api")
-@RequestMapping("/api/user")
-public class UserController {
+@Api("数据集管理相关api")
+@RequestMapping("/api/dataset")
+public class DataSetController {
 
     @Autowired
-    private UserService userService;
+    DataSetService dataSetService;
 
-    @ApiOperation("获取用户列表")
+    @ApiOperation("获取数据项列表")
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public ResponseEntity<List<User>> findUserList() {
-        List<User> users = null;
+    public ResponseEntity<List<DataSet>> findDataSetList() {
+        List<DataSet> dataSets = null;
         try {
-            users = userService.selectUserAll();
+            dataSets = dataSetService.selectDataSetAll();
         } catch (Exception e) {
             log.error(e.getMessage());
         }
-        log.info("获取 user list ---{} ...", users);
-        if (CollectionUtils.isEmpty(users)) {
+        log.info("获取 dataSet list ---{} ...", dataSets);
+        if (CollectionUtils.isEmpty(dataSets)) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return ResponseEntity.ok(users);
+        return ResponseEntity.ok(dataSets);
     }
 
-    @ApiOperation("添加用户信息")
+    @ApiOperation("添加数据项信息")
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public ResponseEntity<Integer> addUser(User user) {
+    public ResponseEntity<Integer> addDataSet(DataSet dataSet) {
         Integer res = 0;
-        res = userService.addUser(user);
+        res = dataSetService.addDataSet(dataSet);
         if (res <= 0) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return ResponseEntity.ok(res);
     }
 
-    @ApiOperation("修改用户信息")
+    @ApiOperation("修改数据项信息")
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public ResponseEntity<Integer> updateUser(User user) {
+    public ResponseEntity<Integer> updateDataSet(DataSet dataSet) {
         Integer res = 0;
-        res = userService.updateUser(user);
+        res = dataSetService.updateDataSet(dataSet);
         if (res <= 0) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return ResponseEntity.ok(res);
     }
 
-    @ApiOperation("删除用户信息")
+    @ApiOperation("删除数据项信息")
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    public ResponseEntity<Integer> deleteUser(User user) {
+    public ResponseEntity<Integer> deleteDataSet(DataSet dataSet) {
         Integer res = 0;
-        res = userService.deleteUser(user);
+        res = dataSetService.deleteDataSet(dataSet);
         if (res <= 0) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

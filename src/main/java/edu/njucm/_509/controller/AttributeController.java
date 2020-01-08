@@ -1,7 +1,7 @@
 package edu.njucm._509.controller;
 
-import edu.njucm._509.pojo.User;
-import edu.njucm._509.service.UserService;
+import edu.njucm._509.pojo.Attribute;
+import edu.njucm._509.service.AttributeService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -17,56 +17,56 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@Api("用户信息管理相关Api")
-@RequestMapping("/api/user")
-public class UserController {
+@Api("基于属性管理api")
+@RequestMapping("/api/attribute")
+public class AttributeController {
 
     @Autowired
-    private UserService userService;
+    AttributeService attributeService;
 
-    @ApiOperation("获取用户列表")
+    @ApiOperation("获取属性列表")
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public ResponseEntity<List<User>> findUserList() {
-        List<User> users = null;
+    public ResponseEntity<List<Attribute>> findAttributeList() {
+        List<Attribute> attributes = null;
         try {
-            users = userService.selectUserAll();
+            attributes = attributeService.selectAttributeAll();
         } catch (Exception e) {
             log.error(e.getMessage());
         }
-        log.info("获取 user list ---{} ...", users);
-        if (CollectionUtils.isEmpty(users)) {
+        log.info("获取 attribute list ---{} ...", attributes);
+        if (CollectionUtils.isEmpty(attributes)) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return ResponseEntity.ok(users);
+        return ResponseEntity.ok(attributes);
     }
 
-    @ApiOperation("添加用户信息")
+    @ApiOperation("添加属性信息")
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public ResponseEntity<Integer> addUser(User user) {
+    public ResponseEntity<Integer> addAttribute(Attribute attribute) {
         Integer res = 0;
-        res = userService.addUser(user);
+        res = attributeService.addAttribute(attribute);
         if (res <= 0) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return ResponseEntity.ok(res);
     }
 
-    @ApiOperation("修改用户信息")
+    @ApiOperation("修改属性信息")
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public ResponseEntity<Integer> updateUser(User user) {
+    public ResponseEntity<Integer> updateAttribute(Attribute attribute) {
         Integer res = 0;
-        res = userService.updateUser(user);
+        res = attributeService.updateAttribute(attribute);
         if (res <= 0) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return ResponseEntity.ok(res);
     }
 
-    @ApiOperation("删除用户信息")
+    @ApiOperation("删除属性信息")
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    public ResponseEntity<Integer> deleteUser(User user) {
+    public ResponseEntity<Integer> deleteAttribute(Attribute attribute) {
         Integer res = 0;
-        res = userService.deleteUser(user);
+        res = attributeService.deleteAttribute(attribute);
         if (res <= 0) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

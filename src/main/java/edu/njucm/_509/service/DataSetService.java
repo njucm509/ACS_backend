@@ -1,5 +1,6 @@
 package edu.njucm._509.service;
 
+import com.github.pagehelper.PageHelper;
 import edu.njucm._509.mapper.DataSetMapper;
 import edu.njucm._509.pojo.DataSet;
 import lombok.extern.slf4j.Slf4j;
@@ -33,5 +34,10 @@ public class DataSetService {
     }
     public int updateDataSet(DataSet dataSet){
         return dataSetMapper.updateByPrimaryKey(dataSet);
+    }
+
+    public List<DataSet> getDataSetPage(int page,int pageSize){
+        PageHelper.startPage(page,pageSize);
+        return dataSetMapper.selectAll();
     }
 }

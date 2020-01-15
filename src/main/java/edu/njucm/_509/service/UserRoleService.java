@@ -1,5 +1,6 @@
 package edu.njucm._509.service;
 
+import com.github.pagehelper.PageHelper;
 import edu.njucm._509.mapper.UserMapper;
 import edu.njucm._509.mapper.UserRoleMapper;
 import edu.njucm._509.pojo.User;
@@ -34,5 +35,11 @@ public class UserRoleService {
     }
     public int updateUserRole(UserRole userRole){
         return userRoleMapper.updateByPrimaryKey(userRole);
+    }
+
+//    f分页
+    public List<UserRole> getUserRolePage(int page,int pageSize){
+        PageHelper.startPage(page,pageSize);
+        return userRoleMapper.selectAll();
     }
 }

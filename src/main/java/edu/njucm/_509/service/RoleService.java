@@ -1,5 +1,6 @@
 package edu.njucm._509.service;
 
+import com.github.pagehelper.PageHelper;
 import edu.njucm._509.mapper.RoleMapper;
 import edu.njucm._509.pojo.Role;
 import lombok.extern.slf4j.Slf4j;
@@ -32,5 +33,10 @@ public class RoleService {
     }
     public int updateRole(Role role){
         return roleMapper.updateByPrimaryKey(role);
+    }
+//    分页
+    public List<Role> getRolePage(int page,int pageSize){
+        PageHelper.startPage(page,pageSize);
+        return roleMapper.selectAll();
     }
 }

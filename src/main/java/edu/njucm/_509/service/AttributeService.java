@@ -1,5 +1,6 @@
 package edu.njucm._509.service;
 
+import com.github.pagehelper.PageHelper;
 import edu.njucm._509.mapper.AttributeMapper;
 import edu.njucm._509.pojo.Attribute;
 import lombok.extern.slf4j.Slf4j;
@@ -32,5 +33,10 @@ public class AttributeService {
     }
     public int updateAttribute(Attribute attribute){
         return attributeMapper.updateByPrimaryKey(attribute);
+    }
+//    分页
+    public List<Attribute> getAttributePage(int page,int pageSize){
+        PageHelper.startPage(page,pageSize);
+        return attributeMapper.selectAll();
     }
 }

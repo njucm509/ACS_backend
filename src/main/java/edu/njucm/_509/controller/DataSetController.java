@@ -43,8 +43,7 @@ public class DataSetController {
     @ApiOperation("添加数据项信息")
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ResponseEntity<Integer> addDataSet(DataSet dataSet) {
-        Integer res = 0;
-        res = dataSetService.addDataSet(dataSet);
+        Integer res = dataSetService.addDataSet(dataSet);
         if (res <= 0) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -54,8 +53,7 @@ public class DataSetController {
     @ApiOperation("修改数据项信息")
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public ResponseEntity<Integer> updateDataSet(DataSet dataSet) {
-        Integer res = 0;
-        res = dataSetService.updateDataSet(dataSet);
+        Integer res = dataSetService.updateDataSet(dataSet);
         if (res <= 0) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -65,11 +63,25 @@ public class DataSetController {
     @ApiOperation("删除数据项信息")
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public ResponseEntity<Integer> deleteDataSet(DataSet dataSet) {
-        Integer res = 0;
-        res = dataSetService.deleteDataSet(dataSet);
+        Integer res = dataSetService.deleteDataSet(dataSet);
         if (res <= 0) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return ResponseEntity.ok(res);
+    }
+
+    @ApiOperation("数据集分页")
+    @RequestMapping(value = "/getPage", method = RequestMethod.POST)
+    public ResponseEntity<List<DataSet>> getDataSetPage(int page, int pageSize) {
+        List<DataSet> dataSets = null;
+        try {
+            dataSets = dataSetService.getDataSetPage(page, pageSize);
+        } catch (Exception e) {
+            log.error(e.getMessage());
+        }
+        if (CollectionUtils.isEmpty(dataSets)) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return ResponseEntity.ok(dataSets);
     }
 }

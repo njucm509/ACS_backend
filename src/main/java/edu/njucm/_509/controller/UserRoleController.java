@@ -6,6 +6,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
@@ -42,8 +43,7 @@ public class UserRoleController {
     @ApiOperation("添加赋权信息")
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ResponseEntity<Integer> addUserRole(UserRole userRole) {
-        Integer res = 0;
-        res = userRoleService.addUserRole(userRole);
+        Integer res = userRoleService.addUserRole(userRole);
         if (res <= 0) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -53,8 +53,7 @@ public class UserRoleController {
     @ApiOperation("修改赋权信息")
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public ResponseEntity<Integer> updateUserRole(UserRole userRole) {
-        Integer res = 0;
-        res = userRoleService.updateUserRole(userRole);
+        Integer res = userRoleService.updateUserRole(userRole);
         if (res <= 0) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -64,11 +63,25 @@ public class UserRoleController {
     @ApiOperation("删除赋权信息")
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public ResponseEntity<Integer> deleteUserRole(UserRole userRole) {
-        Integer res = 0;
-        res = userRoleService.deleteUserRole(userRole);
+        Integer res = userRoleService.deleteUserRole(userRole);
         if (res <= 0) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return ResponseEntity.ok(res);
+    }
+
+    @ApiOperation("分页查询赋权信息")
+    @RequestMapping(value = "/getPage", method = RequestMethod.POST)
+    public ResponseEntity<List<UserRole>> getUserRolePage(int page, int pageSize) {
+        List<UserRole> userRoles = null;
+        try {
+            userRoles = userRoleService.getUserRolePage(page, pageSize);
+        } catch (Exception e) {
+            log.error(e.getMessage());
+        }
+        if (CollectionUtils.isEmpty(userRoles)) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return ResponseEntity.ok(userRoles);
     }
 }

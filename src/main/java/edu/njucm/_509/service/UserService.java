@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -23,10 +24,6 @@ public class UserService {
     public List<User> selectUserAll() {
         List<User> list = userMapper.selectAll();
         log.info("user list: {}", list);
-//        if (CollectionUtils.isEmpty(list)) {
-            // 可以尝试自定义异常
-//            throw new Exception("user list not found");
-//        }
         return list;
     }
     public int addUser(User user){
@@ -36,6 +33,12 @@ public class UserService {
         return userMapper.delete(user);
     }
     public int updateUser(User user) { return userMapper.updateByPrimaryKey(user);}
+    public List<User> selectLoginUser(User user){
+        Example example = new Example(User.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andCondition("user_name="+"'"+user.getUserName()+"'"+"and user_password="+"'"+user.getUserPassword()+"'");
+        return userMapper.selectByExample(example);
+    }
 
 //    分页查询
     public List<User> getUserPage(int page,int pageSize){

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -25,6 +26,22 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @ApiOperation("判断用户是否合法")
+    @RequestMapping(value = "/login",method = RequestMethod.POST)
+    public ResponseEntity<List<User>> userLogin(String name,String password){
+        List<User> users = null;
+        User user = new User();
+        user.setUserName(name);
+        user.setUserPassword(password);
+        users = userService.selectLoginUser(user);
+        System.out.println("接受的参数name="+user.getUserName()+",password:"+user.getUserPassword());
+        log.info("login:",users);
+        if (CollectionUtils.isEmpty(users)){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return ResponseEntity.ok(users);
+    }
 
     @ApiOperation("获取用户列表")
     @RequestMapping(value = "/list", method = RequestMethod.GET)

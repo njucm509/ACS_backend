@@ -33,11 +33,8 @@ public class UserService {
         return userMapper.delete(user);
     }
     public int updateUser(User user) { return userMapper.updateByPrimaryKey(user);}
-    public List<User> selectLoginUser(User user){
-        Example example = new Example(User.class);
-        Example.Criteria criteria = example.createCriteria();
-        criteria.andCondition("user_name="+"'"+user.getUserName()+"'"+"and user_password="+"'"+user.getUserPassword()+"'");
-        return userMapper.selectByExample(example);
+    public User login(User user){
+        return userMapper.selectOne(user);
     }
 
 //    分页查询

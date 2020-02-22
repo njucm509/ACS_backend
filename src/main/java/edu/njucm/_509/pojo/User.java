@@ -1,6 +1,7 @@
 package edu.njucm._509.pojo;
 
 import io.swagger.annotations.ApiModel;
+import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.*;

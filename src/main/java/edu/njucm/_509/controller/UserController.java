@@ -6,17 +6,16 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.*;
 
 @Slf4j
 @RestController
@@ -28,21 +27,28 @@ public class UserController {
     private UserService userService;
 
     @ApiOperation("判断用户是否合法")
-    @RequestMapping(value = "/login",method = RequestMethod.POST)
-    public ResponseEntity<List<User>> userLogin(String name,String password){
-        List<User> users = null;
-        User user = new User();
-        user.setUserName(name);
-        user.setUserPassword(password);
-        users = userService.selectLoginUser(user);
-        System.out.println("接受的参数name="+user.getUserName()+",password:"+user.getUserPassword());
-        log.info("login:",users);
-        if (CollectionUtils.isEmpty(users)){
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public ResponseEntity<User> userLogin(@RequestBody User user) {
+
+        log.info("user: {}", user);
+        User res = userService.login(user);
+        if (res == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return ResponseEntity.ok(users);
+        return ResponseEntity.ok(res);
     }
 
+/*    @RequestMapping("/login")
+    public Map<String, Object> login(@RequestBody User user) {
+//        System.out.println(dataSource);
+        log.info("{} come in...", user);
+        HashMap<String, Object> msg = new HashMap<>();
+        User u = service.login(user);
+        System.out.println(u);
+        msg.put("msg", "ok");
+        msg.put("user", u);
+        return msg;
+    }*/
     @ApiOperation("获取用户列表")
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public ResponseEntity<List<User>> findUserList() {

@@ -23,7 +23,7 @@ public class UserService {
 
     public List<User> selectUserAll() {
         List<User> list = userMapper.selectAll();
-        log.info("user list: {}", list);
+//        log.info("user list: {}", list);
         return list;
     }
     public int addUser(User user){

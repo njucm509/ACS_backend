@@ -32,23 +32,17 @@ public class UserController {
 
         log.info("user: {}", user);
         User res = userService.login(user);
+        log.info("res:{}",res);
+//        log.info("res.getStatus:{}",res.getUserStatus());
         if (res == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }else if ("停用".equals(res.getUserStatus())){
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }else{
+            return ResponseEntity.ok(res);
         }
-        return ResponseEntity.ok(res);
     }
 
-/*    @RequestMapping("/login")
-    public Map<String, Object> login(@RequestBody User user) {
-//        System.out.println(dataSource);
-        log.info("{} come in...", user);
-        HashMap<String, Object> msg = new HashMap<>();
-        User u = service.login(user);
-        System.out.println(u);
-        msg.put("msg", "ok");
-        msg.put("user", u);
-        return msg;
-    }*/
     @ApiOperation("获取用户列表")
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public ResponseEntity<List<User>> findUserList() {
@@ -67,37 +61,45 @@ public class UserController {
 
     @ApiOperation("添加用户信息")
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public ResponseEntity<Integer> addUser(User user) {
+    public ResponseEntity<User> addUser(@RequestBody User user) {
+        //用当前时间的毫秒数作为id
+        String id = Calendar.getInstance().getTimeInMillis()+"";
+        user.setUserId(id);
+        //状态默认是正常
+        user.setUserStatus("正常");
         Integer res = userService.addUser(user);
         if (res <= 0) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return ResponseEntity.ok(res);
+        return ResponseEntity.ok(user);
     }
 
     @ApiOperation("修改用户信息")
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public ResponseEntity<Integer> updateUser(User user) {
+    public ResponseEntity<Integer> updateUser(@RequestBody User user) {
+        log.info("updateUser:{}",user);
         Integer res = userService.updateUser(user);
         if (res <= 0) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            //返回500
+            return new ResponseEntity<>(HttpStatus.SERVICE_UNAVAILABLE);
         }
         return ResponseEntity.ok(res);
     }
 
     @ApiOperation("删除用户信息")
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    public ResponseEntity<Integer> deleteUser(User user) {
+    public ResponseEntity<User> deleteUser(@RequestBody User user) {
+        log.info("deleteUser:{}",user);
         Integer res = userService.deleteUser(user);
         if (res <= 0) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.SERVICE_UNAVAILABLE);
         }
-        return ResponseEntity.ok(res);
+        return ResponseEntity.ok(user);
     }
 
     @ApiOperation("分页查询用户")
     @RequestMapping(value = "/getPage", method = RequestMethod.POST)
-    public ResponseEntity<List<User>> getUserPage(int page, int pageSize) {
+    public ResponseEntity<List<User>> getUserPage(@RequestParam(value = "page") int page, @RequestParam(value = "pageSize") int pageSize) {
         List<User> users = null;
         try {
             users = userService.getUserPage(page, pageSize);

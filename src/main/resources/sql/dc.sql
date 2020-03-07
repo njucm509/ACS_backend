@@ -10,28 +10,49 @@ Target Server Type    : MYSQL
 Target Server Version : 80016
 File Encoding         : 65001
 
-Date: 2020-01-04 14:53:45
+Date: 2020-03-07 10:12:06
 */
-
 
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for attribute
+-- Table structure for attribue
 -- ----------------------------
-DROP TABLE IF EXISTS `attribute`;
-CREATE TABLE `attribute` (
+DROP TABLE IF EXISTS `attribue`;
+CREATE TABLE `attribue` (
   `attribute_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `attribute_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
--- Records of attribute
+-- Records of attribue
 -- ----------------------------
-INSERT INTO `attribute` VALUES ('1', 'name、sex、birthday、hospital、department、attending_doctor、medical_insurance、date_of_consultation、visiting_status、complaints、seriousness、medical_history、treatment_effect、speciality_check_up、drug_use、release_time');
-INSERT INTO `attribute` VALUES ('2', 'hospital、department、attending_doctor、visiting_status、complaints、seriousness、medical_history、treatment_effect、speciality_check_up、drug_use、release_time');
-INSERT INTO `attribute` VALUES ('3', 'visiting_status、complaints、seriousness、medical_history、treatment_effect、speciality_check_up、release_time');
-INSERT INTO `attribute` VALUES ('4', 'NULL');
+INSERT INTO `attribue` VALUES ('1', 'name、sex、birthday、hospital、department、attending_doctor、medical_insurance、date_of_consultation、visiting_status、complaints、seriousness、medical_history、treatment_effect、speciality_check_up、drug_use、release_time');
+INSERT INTO `attribue` VALUES ('2', 'hospital、department、attending_doctor、visiting_status、complaints、seriousness、medical_history、treatment_effect、speciality_check_up、drug_use、release_time');
+INSERT INTO `attribue` VALUES ('3', 'visiting_status、complaints、seriousness、medical_history、treatment_effect、speciality_check_up、release_time');
+INSERT INTO `attribue` VALUES ('4', 'NULL');
+
+-- ----------------------------
+-- Table structure for authority
+-- ----------------------------
+DROP TABLE IF EXISTS `authority`;
+CREATE TABLE `authority` (
+  `id` varchar(255) COLLATE utf8_bin NOT NULL,
+  `content` varchar(255) COLLATE utf8_bin DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- ----------------------------
+-- Records of authority
+-- ----------------------------
+INSERT INTO `authority` VALUES ('1', 'auth_upload,auth_select_country');
+INSERT INTO `authority` VALUES ('2', 'audit_authority');
+INSERT INTO `authority` VALUES ('3', 'auth_download,auth_select_country');
+INSERT INTO `authority` VALUES ('4', 'auth_upload,auth_download,auth_add,auth_delete,auth_update,auth_select_self');
+INSERT INTO `authority` VALUES ('5', 'auth_download,auth_delete,auth_select_department');
+INSERT INTO `authority` VALUES ('6', 'auth_download,auth_delete,auth_select_company');
+INSERT INTO `authority` VALUES ('7', 'auth_download,auth_delete,auth_select_district');
+INSERT INTO `authority` VALUES ('8', 'auth_download,auth_delete,auth_select_province');
+INSERT INTO `authority` VALUES ('9', 'auth_download,auth_delete,auth_select_country');
 
 -- ----------------------------
 -- Table structure for dataset
@@ -74,43 +95,73 @@ DROP TABLE IF EXISTS `role`;
 CREATE TABLE `role` (
   `role_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `role_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `auth_upload` char(1) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
-  `auth_download` char(1) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
-  `auth_add` char(1) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
-  `auth_delete` char(1) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
-  `auth_update` char(1) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
-  `auth_select_self` char(1) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
-  `auth_select_department` char(1) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
-  `auth_select_company` char(1) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
-  `auth_select_district` char(1) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
-  `auth_select_city` char(1) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
-  `auth_select_province` char(1) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
-  `auth_select_country` char(1) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
-  `audit_authority` char(1) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
-  `attribute_permission` varchar(1) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
   PRIMARY KEY (`role_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
 -- Records of role
 -- ----------------------------
-INSERT INTO `role` VALUES ('1', '科研部门(数请求者)', '', '1', '', '', '', '', '', '', '', '', '', '1', '', '2');
-INSERT INTO `role` VALUES ('10', '系统管理员呗', '', '', '', '', '', '', '', '', '', '', '', '', '1', '4');
-INSERT INTO `role` VALUES ('2', '防疫部门(数据请求者)', '', '1', '', '', '', '', '', '', '', '', '', '1', '', '3');
-INSERT INTO `role` VALUES ('3', '数据提供者', '1', '1', '1', '1', '1', '1', '', '', '', '', '', '', '', '1');
-INSERT INTO `role` VALUES ('4', '科室领导(监管者)', '', '1', '', '1', '', '', '1', '', '', '', '', '', '', '1');
-INSERT INTO `role` VALUES ('5', '院领导(监管者）', '', '1', '', '1', '', '', '', '1', '', '', '', '', '', '');
-INSERT INTO `role` VALUES ('6', '区领导', '', '1', '', '1', '', '', '', '', '1', '', '', '', '', '');
-INSERT INTO `role` VALUES ('7', '市领导', '', '1', '', '1', '', '', '', '', '', '1', '', '', '', '');
-INSERT INTO `role` VALUES ('8', '省领导', '', '1', '', '1', '', '', '', '', '', '', '1', '', '', '');
-INSERT INTO `role` VALUES ('9', '国家监管者', '', '1', '', '1', '', '', '', '', '', '', '', '1', '', '');
+INSERT INTO `role` VALUES ('1', '科研部门(数请求者)');
+INSERT INTO `role` VALUES ('10', '系统管理员');
+INSERT INTO `role` VALUES ('2', '防疫部门(数据请求者)');
+INSERT INTO `role` VALUES ('3', '数据提供者');
+INSERT INTO `role` VALUES ('4', '科室监管');
+INSERT INTO `role` VALUES ('5', '院监管');
+INSERT INTO `role` VALUES ('6', '区监管');
+INSERT INTO `role` VALUES ('7', '市监管');
+INSERT INTO `role` VALUES ('8', '省监管');
+INSERT INTO `role` VALUES ('9', '国家监管');
+
+-- ----------------------------
+-- Table structure for role_attribute
+-- ----------------------------
+DROP TABLE IF EXISTS `role_attribute`;
+CREATE TABLE `role_attribute` (
+  `role_id` varchar(255) COLLATE utf8_bin NOT NULL,
+  `attribute_id` varchar(255) COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- ----------------------------
+-- Records of role_attribute
+-- ----------------------------
+INSERT INTO `role_attribute` VALUES ('1', '2');
+INSERT INTO `role_attribute` VALUES ('2', '4');
+INSERT INTO `role_attribute` VALUES ('3', '3');
+INSERT INTO `role_attribute` VALUES ('4', '1');
+INSERT INTO `role_attribute` VALUES ('5', '1');
+INSERT INTO `role_attribute` VALUES ('6', '1');
+INSERT INTO `role_attribute` VALUES ('7', '1');
+INSERT INTO `role_attribute` VALUES ('8', '1');
+INSERT INTO `role_attribute` VALUES ('9', '1');
+
+-- ----------------------------
+-- Table structure for role_authority
+-- ----------------------------
+DROP TABLE IF EXISTS `role_authority`;
+CREATE TABLE `role_authority` (
+  `role_id` varchar(255) COLLATE utf8_bin NOT NULL,
+  `auth_id` varchar(255) COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- ----------------------------
+-- Records of role_authority
+-- ----------------------------
+INSERT INTO `role_authority` VALUES ('1', '1');
+INSERT INTO `role_authority` VALUES ('2', '2');
+INSERT INTO `role_authority` VALUES ('3', '3');
+INSERT INTO `role_authority` VALUES ('4', '4');
+INSERT INTO `role_authority` VALUES ('5', '5');
+INSERT INTO `role_authority` VALUES ('6', '6');
+INSERT INTO `role_authority` VALUES ('7', '7');
+INSERT INTO `role_authority` VALUES ('8', '8');
+INSERT INTO `role_authority` VALUES ('9', '9');
 
 -- ----------------------------
 -- Table structure for user
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
-  `user_id` varchar(255) COLLATE utf8_bin NOT NULL,
+  `user_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `user_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `user_password` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `user_ip` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
@@ -123,8 +174,18 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', '张一', '123', '10.120.34.215', '部门1', '检疫部门', '正常');
-INSERT INTO `user` VALUES ('2', '张二', 'admin', '10.10.100.12', '部门2', '研发部门', '停用');
+INSERT INTO `user` VALUES ('1', 'root1', 'admin', '10.120.34.215', '部门1', '检疫部门', '正常');
+INSERT INTO `user` VALUES ('10', 'root10', 'admin', '10.10.100.12', '部门2', '研发部门', '停用');
+INSERT INTO `user` VALUES ('11', 'root11', 'admin', '10.120.34.215', '部门1', '检疫部门', '正常');
+INSERT INTO `user` VALUES ('12', 'root12', 'admin', '10.10.100.12', '部门2', '研发部门', '停用');
+INSERT INTO `user` VALUES ('2', 'root2', 'admin', '10.10.100.12', '部门2', '研发部门', '停用');
+INSERT INTO `user` VALUES ('3', 'root3', 'admin', '10.120.34.215', '部门1', '检疫部门', '正常');
+INSERT INTO `user` VALUES ('4', 'root4', 'admin', '10.10.100.12', '部门2', '研发部门', '停用');
+INSERT INTO `user` VALUES ('5', 'root5', 'admin', '10.120.34.215', '部门1', '检疫部门', '正常');
+INSERT INTO `user` VALUES ('6', 'root6', 'admin', '10.10.100.12', '部门2', '研发部门', '停用');
+INSERT INTO `user` VALUES ('7', 'root7', 'admin', '10.120.34.215', '部门1', '检疫部门', '正常');
+INSERT INTO `user` VALUES ('8', 'root8', 'admin', '10.10.100.12', '部门2', '研发部门', '停用');
+INSERT INTO `user` VALUES ('9', 'root9', 'admin', '10.120.34.215', '部门1', '检疫部门', '正常');
 
 -- ----------------------------
 -- Table structure for user_role

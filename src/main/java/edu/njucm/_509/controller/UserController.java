@@ -69,7 +69,7 @@ public class UserController {
         user.setUserStatus("正常");
         Integer res = userService.addUser(user);
         if (res <= 0) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.SERVICE_UNAVAILABLE);
         }
         return ResponseEntity.ok(user);
     }

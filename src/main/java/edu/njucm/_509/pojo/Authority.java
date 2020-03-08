@@ -5,14 +5,14 @@ import lombok.Data;
 
 import javax.persistence.*;
 
-@ApiModel
+@Table(name = "authority")
 @Data
-@Table(name = "role")
-public class Role {
+@ApiModel
+public class Authority {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "role_id")
-    private String roleId;
-    @Column(name = "role_name")
-    private String roleName;
+    @Column(name = "id")
+    private String id;
+    @Column(name = "content")
+    private String content;
 }

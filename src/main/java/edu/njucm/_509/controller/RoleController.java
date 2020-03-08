@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,32 +42,35 @@ public class RoleController {
 
     @ApiOperation("添加角色信息")
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public ResponseEntity<Integer> addRole(Role role) {
+    public ResponseEntity<Role> addRole(@RequestBody Role role) {
         Integer res = roleService.addRole(role);
         if (res <= 0) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//            返回500
+            return new ResponseEntity<>(HttpStatus.SERVICE_UNAVAILABLE);
         }
-        return ResponseEntity.ok(res);
+        return ResponseEntity.ok(role);
     }
 
     @ApiOperation("修改角色信息")
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public ResponseEntity<Integer> updateRole(Role role) {
+    public ResponseEntity<Role> updateRole(@RequestBody Role role) {
+        System.out.println(role.getRoleName());
+        log.info("updateRole:{}",role);
         Integer res = roleService.updateRole(role);
         if (res <= 0) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.SERVICE_UNAVAILABLE);
         }
-        return ResponseEntity.ok(res);
+        return ResponseEntity.ok(role);
     }
 
     @ApiOperation("删除角色信息")
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    public ResponseEntity<Integer> deleteRole(Role role) {
+    public ResponseEntity<Role> deleteRole(@RequestBody Role role) {
         Integer  res = roleService.deleteRole(role);
         if (res <= 0) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.SERVICE_UNAVAILABLE);
         }
-        return ResponseEntity.ok(res);
+        return ResponseEntity.ok(role);
     }
 
     @ApiOperation("角色分页")

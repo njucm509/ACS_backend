@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -42,7 +43,7 @@ public class AttributeController {
 
     @ApiOperation("添加属性信息")
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public ResponseEntity<Integer> addAttribute(Attribute attribute) {
+    public ResponseEntity<Integer> addAttribute(@RequestBody Attribute attribute) {
         Integer res = attributeService.addAttribute(attribute);
         if (res <= 0) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -52,7 +53,7 @@ public class AttributeController {
 
     @ApiOperation("修改属性信息")
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public ResponseEntity<Integer> updateAttribute(Attribute attribute) {
+    public ResponseEntity<Integer> updateAttribute(@RequestBody Attribute attribute) {
         Integer res = attributeService.updateAttribute(attribute);
         if (res <= 0) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -62,7 +63,7 @@ public class AttributeController {
 
     @ApiOperation("删除属性信息")
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    public ResponseEntity<Integer> deleteAttribute(Attribute attribute) {
+    public ResponseEntity<Integer> deleteAttribute(@RequestBody Attribute attribute) {
         Integer res = attributeService.deleteAttribute(attribute);
         if (res <= 0) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
